@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: keycloak-configmap
+  namespace: ingress-nginx  # Make sure this matches the namespace of your NGINX Ingress Controller
+data:
+  proxy-body-size: "100m"
+  use-forwarded-headers: "true"

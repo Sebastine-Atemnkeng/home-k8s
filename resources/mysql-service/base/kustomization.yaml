@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: mysql-service
+
+resources:
+- mysql-service-configmap.yaml
+- mysql-service-pvc.yaml
+- mysql-service-svc.yaml
+- mysql-service-deployment.yaml
+
+labels:
+- includeSelectors: true
+  pairs:
+    app: mysql

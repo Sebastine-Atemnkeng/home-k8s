@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-service-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx-service
+  template:
+    metadata:
+      labels:
+        app: nginx-service
+    spec:
+      securityContext:
+        runAsUser: 0 # Specifies that the pod should run as root
+      containers:
+      - name: nginx-service
+        image: nginx:latest
+        ports:
+        - containerPort: 80
