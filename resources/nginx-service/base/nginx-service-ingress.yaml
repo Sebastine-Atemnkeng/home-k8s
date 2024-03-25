@@ -2,7 +2,7 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: nginx-service
-  namespace: default
+  namespace: core
 spec:
   rules:
   - host: example-service.com

@@ -7,7 +7,7 @@ metadata:
   labels:
     app: argocd-server
   name: argocd-service-configmap
-  namespace: ingress-nginx
+  namespace: core
 ---
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -20,11 +20,11 @@ metadata:
   labels:
     app: argocd-server
   name: argocd-server-ingress
-  namespace: argocd
+  namespace: core
 spec:
   ingressClassName: nginx
   rules:
-  - host: argocd-service.com
+  - host: argocd.local.m-mobility.com
     http:
       paths:
       - backend:

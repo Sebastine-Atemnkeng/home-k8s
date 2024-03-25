@@ -1,20 +1,17 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: nginx-service
+  name: dashy-service
   namespace: core
-  annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: nginx  # This should match the IngressClass for NGINX
   rules:
-  - host: nginx.local.m-mobility.com
+  - host: example-service.com
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: nginx-service
+            name: service-name
             port:
               number: 80

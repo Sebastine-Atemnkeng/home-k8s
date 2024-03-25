@@ -1,0 +1,12 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: nginx-study
+
+resources:
+# - nginx-service-configMap.yaml
+- nginx-study-deployment.yaml
+# - nginx-service-ingress.yaml
+- nginx-study-svc.yaml
+commonLabels: # Transformaers to add a lable to all kubernetes deployments
+  company: kodekloud

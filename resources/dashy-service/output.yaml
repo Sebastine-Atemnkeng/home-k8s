@@ -3,44 +3,45 @@ data: null
 kind: ConfigMap
 metadata:
   labels:
-    app: nginx-service
-  name: nginx-service-configmap
+    app: dashy-service
+  name: dashy-service-configmap
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: nginx-service
-  name: nginx-service
+    app: dashy-service
+  name: dashy-service
   namespace: core
 spec:
   ports:
   - port: 80
+    protocol: TCP
     targetPort: 80
   selector:
-    app: nginx-service
+    app: dashy-service
   type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: nginx-service
-  name: nginx-service-deployment
+    app: dashy-service
+  name: dasy-service-deployment
   namespace: core
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx-service
+      app: dashy-service
   template:
     metadata:
       labels:
-        app: nginx-service
+        app: dashy-service
     spec:
       containers:
-      - image: nginx:latest
-        name: nginx-service
+      - image: lissy93/dashy:latest
+        name: dashy-service
         ports:
         - containerPort: 80
       securityContext:
@@ -50,21 +51,20 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
-    nginx.ingress.kubernetes.io/ssl-redirect: "false"
+    ingress.kubernetes.io/rewrite-target: /
   labels:
-    app: nginx-service
-  name: nginx-service
+    app: dashy-service
+  name: dashy-service
   namespace: core
 spec:
   ingressClassName: nginx
   rules:
-  - host: nginx.local.m-mobility.com
+  - host: dashy.local.m-mobility.com
     http:
       paths:
       - backend:
           service:
-            name: nginx-service
+            name: dashy-service
             port:
               number: 80
         path: /

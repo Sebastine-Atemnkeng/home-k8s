@@ -2,14 +2,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: argocd-server-ingress
-  namespace: argocd  # Ensure this matches the namespace where Argo CD is deployed
+  namespace: core  # Ensure this matches the namespace where Argo CD is deployed
   annotations:
     kubernetes.io/ingress.class: "nginx"
     nginx.ingress.kubernetes.io/rewrite-target: /
     nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 spec:
   rules:
-  - host: argocd.example.com  # Replace with your domain
+  - host: argocd.local.m-mobility.com  # Replace with your domain
     http:
       paths:
       - path: /

@@ -1,123 +1,71 @@
 apiVersion: v1
 data:
-  proxy-body-size: 100m
-  use-forwarded-headers: "true"
-kind: ConfigMap
+  admin-password: YWRtaW4=
+  admin-username: YWRtaW4=
+kind: Secret
 metadata:
   labels:
-    app: keycloak-service
-  name: keycloak-configmap
-  namespace: ingress-nginx
+    app: keycloak
+  name: keycloak-secret
+  namespace: core
+type: Opaque
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: keycloak-service
+    app: keycloak
   name: keycloak
+  namespace: core
 spec:
   ports:
   - name: http
+    nodePort: 8080
     port: 8080
     targetPort: 8080
   selector:
-    app: keycloak-service
+    app: keycloak
   type: NodePort
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: keycloak-service
+    app: keycloak
   name: keycloak
   namespace: core
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
-      app: keycloak-service
+      app: keycloak
   template:
     metadata:
       labels:
-        app: keycloak-service
+        app: keycloak
     spec:
       containers:
       - args:
-        - start
-        - --cache-stack=kubernetes
+        - start-dev
         env:
         - name: KEYCLOAK_ADMIN
-          value: identify
+          valueFrom:
+            secretKeyRef:
+              key: admin-username
+              name: keycloak-secret
         - name: KEYCLOAK_ADMIN_PASSWORD
-          value: intigate
+          valueFrom:
+            secretKeyRef:
+              key: admin-password
+              name: keycloak-secret
         - name: KC_PROXY
           value: edge
-        - name: jgroups.dns.query
-          value: keycloak
-        - name: PROXY_ADDRESS_FORWARDING
-          value: "true"
-        - name: KC_HEALTH_ENABLED
-          value: "true"
-        - name: KC_METRICS_ENABLED
-          value: "true"
-        - name: KC_HTTP_ENABLED
-          value: "true"
-        - name: KC_HTTP_RELATIVE_PATH
-          value: /auth
-        - name: KC_HOSTNAME_URL
-          value: https://domain-name.com/keycloak/auth/
-        - name: KC_HOSTNAME_ADMIN_URL
-          value: https://domain-name.com/keycloak/auth/
-        - name: KC_DB
-          value: mysql
-        - name: KC_DB_URL
-          value: jdbc:mysql://mysql/keycloak
-        - name: KC_DB_URL_HOST
-          value: mysql
-        - name: KC_DB_URL_PORT
-          value: "3306"
-        - name: KC_DB_URL_DATABASE
-          value: keycloak
-        - name: KC_DB_USERNAME
-          value: root
-        - name: KC_DB_PASSWORD
-          value: password
-        image: quay.io/keycloak/keycloak:21.1.1
+        image: quay.io/keycloak/keycloak:24.0.1
         name: keycloak
         ports:
         - containerPort: 8080
           name: http
-        - containerPort: 7600
-          name: jgroups
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          runAsNonRoot: true
-          runAsUser: 1000
----
-apiVersion: networking.k8s.io/v1
-kind: Ingress
-metadata:
-  annotations:
-    nginx.ingress.kubernetes.io/proxy-body-size: 2500m
-    nginx.ingress.kubernetes.io/proxy-buffer-size: 12k
-    nginx.ingress.kubernetes.io/rewrite-target: /$1
-  labels:
-    app: keycloak-service
-  name: keycloak-ingress
-  namespace: core
-spec:
-  ingressClassName: nginx
-  rules:
-  - host: keycloak-service.com
-    http:
-      paths:
-      - backend:
-          service:
-            name: keycloak
-            port:
-              number: 8080
-        path: /keycloak/(.*)
-        pathType: Prefix
+        readinessProbe:
+          httpGet:
+            path: /realms/master
+            port: 8080

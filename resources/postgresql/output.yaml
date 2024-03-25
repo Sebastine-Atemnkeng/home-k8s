@@ -1,0 +1,93 @@
+apiVersion: v1
+data:
+  POSTGRES_DB: cG9zdGdyZXNkYg==
+  POSTGRES_PASSWORD: dGVzdDEyMw==
+  POSTGRES_USER: YWRtaW4=
+kind: Secret
+metadata:
+  labels:
+    app: postgres
+  name: postgres-secret
+  namespace: core
+type: Opaque
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: postgres
+  name: postgres
+  namespace: core
+spec:
+  ports:
+  - port: 5432
+  selector:
+    app: postgres
+  type: ClusterIP
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  labels:
+    app: postgres
+    type: local
+  name: postgres-pv-volume
+  namespace: core
+spec:
+  accessModes:
+  - ReadWriteMany
+  capacity:
+    storage: 5Gi
+  hostPath:
+    path: /mnt/data
+  storageClassName: manual
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app: postgres
+  name: postgres-pv-claim
+  namespace: core
+spec:
+  accessModes:
+  - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: manual
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: postgres
+  name: postgres
+  namespace: core
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  serviceName: postgres-db-service
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - envFrom:
+        - secretRef:
+            name: postgres-secret
+        image: postgres:latest
+        imagePullPolicy: IfNotPresent
+        name: postgres
+        ports:
+        - containerPort: 5432
+        volumeMounts:
+        - mountPath: /var/lib/postgresql/data
+          name: postgredb
+      volumes:
+      - name: postgredb
+        persistentVolumeClaim:
+          claimName: postgres-pv-claim

@@ -1,22 +1,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  namespace: core
-  name: nginx-service-deployment
+  name: nginx-study-deployment
+  # namespace: dev
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx-service
+      app: nginx-study
   template:
     metadata:
       labels:
-        app: nginx-service
+        app: nginx-study
     spec:
       securityContext:
         runAsUser: 0 # Specifies that the pod should run as root
       containers:
-      - name: nginx-service
+      - name: nginx-study
         image: nginx:latest
         ports:
         - containerPort: 80

@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   namespace: core
-  name: nginx-service-deployment
+  name: dasy-service-deployment
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx-service
+      app: dashy-service
   template:
     metadata:
       labels:
-        app: nginx-service
+        app: dashy-service
     spec:
       securityContext:
         runAsUser: 0 # Specifies that the pod should run as root
       containers:
-      - name: nginx-service
-        image: nginx:latest
+      - name: dashy-service
+        image: lissy93/dashy:latest
         ports:
         - containerPort: 80

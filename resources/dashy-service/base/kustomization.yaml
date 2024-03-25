@@ -1,0 +1,15 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+metadata:
+  name: dashy-service
+
+
+resources:
+- dashy-service-configMap.yaml
+- dashy-service-deployment.yaml
+- dashy-service-ingress.yaml
+- dashy-service-svc.yaml
+labels:
+- includeSelectors: true
+  pairs:
+    app: dashy-service
