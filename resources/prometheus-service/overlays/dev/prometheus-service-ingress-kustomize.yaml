@@ -8,13 +8,13 @@ metadata:
 spec:
   ingressClassName: nginx  # This should match the IngressClass for NGINX
   rules:
-  - host: prometheus.example.com  # Replace with your domain
+  - host: prometheus.local.m-mobility.com # Replace with your domain
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: prometheus-server
+            name: my-prometheus-server
             port:
               number: 80
