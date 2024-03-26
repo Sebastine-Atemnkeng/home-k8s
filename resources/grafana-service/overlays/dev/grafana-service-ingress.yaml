@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx  # This should match the IngressClass for NGINX
   rules:
-  - host: grafana.example.com  # Replace with your domain
+  - host: grafana.local.m-mobility.com  # Replace with your domain
     http:
       paths:
       - path: /
