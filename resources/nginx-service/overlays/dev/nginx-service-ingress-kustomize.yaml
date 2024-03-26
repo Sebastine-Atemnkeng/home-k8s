@@ -8,7 +8,7 @@ metadata:
 spec:
   ingressClassName: nginx  # This should match the IngressClass for NGINX
   rules:
-  - host: nginx-service.com
+  - host: nginx.local.m-mobility.com
     http:
       paths:
       - path: /
