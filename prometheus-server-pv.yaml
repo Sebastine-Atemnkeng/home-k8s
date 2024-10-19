@@ -1,17 +1,17 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: my-prometheus-server # Name your PV accordingly
+  name: prometheus-server # Name your PV accordingly
 spec:
   capacity:
-    storage: 10Gi # Ensure this meets or exceeds the PVC requirement
+    storage: 5Gi # Ensure this meets or exceeds the PVC requirement
   volumeMode: Filesystem
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: my-prometheus-server
+  storageClassName: prometheus-server
   local:
-    path: /mnt/prometheus/server # Ensure this directory exists on the specified node
+    path: "/mnt/data" # Ensure this directory exists on the specified node
   nodeAffinity:
     required:
       nodeSelectorTerms:
@@ -19,4 +19,4 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - eks-worker-1 # Adjust to the target node's name
+                - worker-1 # Adjust to the target node's name

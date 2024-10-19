@@ -1,8 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: dashy-service
-  namespace: core
+  name: dashy-service-ingress
   annotations:
     ingress.kubernetes.io/rewrite-target: /
 spec:

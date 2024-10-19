@@ -5,7 +5,7 @@ metadata:
 
 resources:
 - keycloak-service-secretMap.yaml
-# - keycloak-service-ingress.yaml
+- keycloak-service-ingress.yaml
 - keycloak-service-svc.yaml
 - keycloak-service-deployment.yaml
 

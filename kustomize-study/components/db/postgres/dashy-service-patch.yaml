@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dashy-service-deployment
+
+spec:
+  template:
+    spec:
+      containers:
+        - name: dashy-service
+          env:
+            - name: POSTGRES_CONNECTION
+              value: postgres-service
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: postgres-creds
+                  key: password

@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongo-express-service
+spec:
+  selector:
+    component: mongo-express
+  ports:
+    - port: 8081
+      targetPort: 8081

@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: storage-prometheus-alertmanager-0 # Name your PV accordingly
+spec:
+  capacity:
+    storage: 5Gi # Ensure this meets or exceeds the PVC requirement
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteOnce
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: storage-prometheus-alertmanager-0
+  local:
+    path: "/mnt/data" # Ensure this directory exists on the specified node
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - worker-1 # Adjust to the target node's name

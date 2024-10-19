@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+
+spec:
+  template:
+    spec:
+      containers:
+        - name: api
+          env:
+            - name: MONGODB_CONNECTION
+              value: "mongodb-service"
+
+            - name: MONGODB_ADMINUSERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: admin-username
+
+            - name: MONGODB_ADMINPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-secret
+                  key: admin-password

@@ -1,17 +1,18 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: dashy-service
-  namespace: core
+  name: dashy-service-ingress
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-  - host: example-service.com
+  - host: example.com  # Replace with your domain
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: service-name
+            name: dashy-service
             port:
-              number: 80
+              number: 443

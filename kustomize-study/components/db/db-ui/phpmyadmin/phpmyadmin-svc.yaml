@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: phpmyadmin-service
+spec:
+  type: NodePort
+  selector:
+    app: phpmyadmin
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 30002 # Optional: Specify a nodePort or let Kubernetes choose

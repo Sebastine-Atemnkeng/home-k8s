@@ -1,7 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+metadata:
+  name: stg-kustomize
 
-patches:
-- path: nginx-study-deployment-kustomize.yaml
-resources:
-- ../../base
+bases:
+  - ../../base
+
+components:
+  - ../../components/auth
