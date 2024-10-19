@@ -30,7 +30,7 @@ spec:
         value: 0.1.0
     path: helm-charts/payments
     repoURL: git@github.com:Sebastine-Atemnkeng/mnmsw-k8s.git # git write back repo
-    targetRevision: main
+    targetRevision: master
   syncPolicy:
     automated:
       allowEmpty: false

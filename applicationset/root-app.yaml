@@ -11,6 +11,6 @@ spec:
     namespace: argocd
     name: in-cluster
   source:
-    path: mnmsw-k8s/applicationset/project
+    path: applicationset/project
     repoURL: git@github.com:Sebastine-Atemnkeng/mnmsw-k8s.git
-    targetRevision: main
+    targetRevision: master
