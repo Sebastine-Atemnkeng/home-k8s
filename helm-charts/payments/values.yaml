@@ -6,9 +6,9 @@ replicaCount: 1
 
 image:
   repository: sebastine/payments
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "v2.5.0"
 
 imagePullSecrets: []
 nameOverride: ""
