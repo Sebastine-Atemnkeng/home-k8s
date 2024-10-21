@@ -1,0 +1,14 @@
+helm:
+  parameters:
+  - name: image.repository
+    value: sebastine/payments
+    forcestring: false
+  - name: service.port
+    value: "9000"
+    forcestring: false
+  - name: image.tag
+    value: v2.5.0
+    forcestring: true
+  - name: image.name
+    value: sebastine/payments
+    forcestring: true
