@@ -39,11 +39,11 @@ spec:
               protocol: TCP
           livenessProbe:
             httpGet:
-              path: /
+              path: /payments   # update path if your application is not in the root path /
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: /payments   # update path if your application is not in the root path /
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
