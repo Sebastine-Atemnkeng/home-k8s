@@ -8,11 +8,11 @@ metadata:
     argocd-image-updater.argoproj.io/write-back-method: git
   finalizers:
   - resources-finalizer.argocd.argoproj.io
-  name: payments-prod
+  name: payments-stag
   namespace: argocd
 spec:
   destination:
-    namespace: prod
+    namespace: stag
     server: https://kubernetes.default.svc
   project: default
   source:
