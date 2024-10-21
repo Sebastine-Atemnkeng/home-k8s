@@ -47,7 +47,7 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: magna-api.local
+    - host: payments.local
       paths:
         - path: /payments
           pathType: ImplementationSpecific
@@ -69,26 +69,11 @@ resources:
     cpu: "1000m"
     memory: "256Mi"
 
-# livenessProbe:
-#   httpGet:
-#     path: /healthy
-#     port: http
-#   initialDelaySeconds: 0
-#   periodSeconds: 1
-
-# readinessProbe:
-#   httpGet:
-#     path: /ready
-#     port: http
-#   initialDelaySeconds: 0
-#   periodSeconds: 1
-  
 autoscaling:
   enabled: false
   minReplicas: 1
   maxReplicas: 15
   targetCPUUtilizationPercentage: 80
-  # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 
