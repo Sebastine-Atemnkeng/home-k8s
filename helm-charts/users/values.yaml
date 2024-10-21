@@ -47,9 +47,9 @@ ingress:
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: users.local
+    - host: magna-api.local
       paths:
-        - path: /
+        - path: /users
           pathType: ImplementationSpecific
   tls: []
   #  - secretName: chart-example-tls
@@ -73,6 +73,7 @@ autoscaling:
   minReplicas: 1
   maxReplicas: 5
   targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
 
 nodeSelector: {}
 
