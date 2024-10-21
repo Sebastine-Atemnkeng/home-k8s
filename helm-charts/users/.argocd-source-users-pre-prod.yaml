@@ -1,0 +1,14 @@
+helm:
+  parameters:
+  - name: image.repository
+    value: sebastine/users
+    forcestring: false
+  - name: service.port
+    value: "8000"
+    forcestring: false
+  - name: image.tag
+    value: v0.5.0
+    forcestring: true
+  - name: image.name
+    value: sebastine/users
+    forcestring: true
