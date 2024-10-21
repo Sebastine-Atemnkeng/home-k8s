@@ -19,8 +19,8 @@ spec:
     helm:
       parameters:
       - name: image.repository
-        value: sebastine/payments  # Updated to Docker Hub repository
-        imagePullPolicy: Always
+        value: sebastine/payments 
+        imagePullPolicy: Always 
       - name: service.port
         value: '9000'
       - name: image.tag
