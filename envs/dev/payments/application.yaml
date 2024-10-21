@@ -22,7 +22,11 @@ spec:
         value: sebastine/payments  # Updated to Docker Hub repository
         imagePullPolicy: Always
       - name: service.port
-        value: '9000'
+        value: '8000'
+      # - name: livenessProbe.httpGet.path
+      #   value: /healthy  # Adjust to match your application
+      # - name: readinessProbe.httpGet.path
+      #   value: /ready  # Adjust to match your applicatio
       - name: image.tag
         value: 0.1.0
     path: helm-charts/payments
@@ -34,7 +38,7 @@ spec:
       prune: true
       selfHeal: true
     syncOptions:
-    - Validate=true
-    - CreateNamespace=true
-    - PrunePropagationPolicy=foreground
-    - PruneLast=true
+    # - Validate=true
+    # - CreateNamespace=true
+    # - PrunePropagationPolicy=foreground
+    # - PruneLast=true
