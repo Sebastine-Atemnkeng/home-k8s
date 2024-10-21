@@ -4,7 +4,7 @@ helm:
     value: sebastine/users
     forcestring: false
   - name: service.port
-    value: "8080"
+    value: "8000"
     forcestring: false
   - name: livenessProbe.httpGet.path
     value: /healthz
