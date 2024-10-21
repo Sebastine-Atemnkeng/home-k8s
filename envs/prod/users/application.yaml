@@ -8,11 +8,11 @@ metadata:
     argocd-image-updater.argoproj.io/write-back-method: git
   finalizers:
   - resources-finalizer.argocd.argoproj.io
-  name: users-dev
+  name: users-prod
   namespace: argocd
 spec:
   destination:
-    namespace: dev
+    namespace: prod
     server: https://kubernetes.default.svc
   project: default
   source:
