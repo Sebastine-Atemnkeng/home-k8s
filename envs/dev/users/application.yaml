@@ -20,7 +20,6 @@ spec:
       parameters:
       - name: image.repository
         value: sebastine/users # Updated to Docker Hub repository
-        imagePullPolicy: Always
       - name: service.port
         value: '8000'
       - name: image.tag
