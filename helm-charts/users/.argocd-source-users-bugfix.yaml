@@ -9,6 +9,9 @@ helm:
   - name: image.tag
     value: v1.0.0
     forcestring: true
+  - name: ingress.host
+    value: users-bugfix.com
+    forcestring: true
   - name: image.name
     value: sebastine/project-tsukinome-bugfix
     forcestring: true
