@@ -1,0 +1,14 @@
+helm:
+  parameters:
+  - name: image.repository
+    value: sebastine/project-tsukinome-bugfix
+    forcestring: false
+  - name: service.port
+    value: "8000"
+    forcestring: false
+  - name: image.tag
+    value: v1.0.0
+    forcestring: true
+  - name: image.name
+    value: sebastine/project-tsukinome-bugfix
+    forcestring: true
