@@ -12,7 +12,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: dev
+    namespace: bugfix
     server: https://kubernetes.default.svc
   project: default
   source:
