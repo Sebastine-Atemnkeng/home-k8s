@@ -13,7 +13,7 @@ helm:
     value: /healthz
     forcestring: false
   - name: image.tag
-    value: "3"
+    value: v1.0.0
     forcestring: true
   - name: image.name
     value: sebastine/project-tsukinome-features
