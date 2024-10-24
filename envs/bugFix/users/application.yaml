@@ -8,7 +8,7 @@ metadata:
     argocd-image-updater.argoproj.io/write-back-method: git
   finalizers:
   - resources-finalizer.argocd.argoproj.io
-  name: users-dev
+  name: users-bugfix
   namespace: argocd
 spec:
   destination:
