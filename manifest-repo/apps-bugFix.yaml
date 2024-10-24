@@ -10,7 +10,7 @@ spec:
   source:
     repoURL: git@github.com:Sebastine-Atemnkeng/mnmsw-k8s.git
     targetRevision: HEAD
-    path: envs/bugFix
+    path: envs/bugfix
     directory:
       recurse: true
   destination:
