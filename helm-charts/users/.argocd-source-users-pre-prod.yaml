@@ -7,7 +7,7 @@ helm:
     value: "8000"
     forcestring: false
   - name: image.tag
-    value: v0.5.0
+    value: "4"
     forcestring: true
   - name: image.name
     value: sebastine/project-tsukinome-release
