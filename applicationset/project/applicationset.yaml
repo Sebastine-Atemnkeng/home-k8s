@@ -11,6 +11,7 @@ spec:
           - env: stag
           - env: pre-prod
           - env: prod
+          - env: bugFix
   template:
     metadata:
       name: "apps-{{.env}}"

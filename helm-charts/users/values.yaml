@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: sebastine/payments
+  repository: sebastine/project-tsukinome-features
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "v0.5.0"

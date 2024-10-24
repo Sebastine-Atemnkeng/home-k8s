@@ -3,23 +3,23 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd-image-updater.argoproj.io/image-list: users=sebastine/project-tsukinome-release  # Updated to Docker Hub repository
+    argocd-image-updater.argoproj.io/image-list: users=sebastine/project-tsukinome-hotfix  # Updated to Docker Hub repository
     argocd-image-updater.argoproj.io/users.update-strategy: semver
     argocd-image-updater.argoproj.io/write-back-method: git
   finalizers:
   - resources-finalizer.argocd.argoproj.io
-  name: users-prod
+  name: users-dev
   namespace: argocd
 spec:
   destination:
-    namespace: prod
+    namespace: dev
     server: https://kubernetes.default.svc
   project: default
   source:
     helm:
       parameters:
       - name: image.repository
-        value: sebastine/project-tsukinome-release # Updated to Docker Hub repository
+        value: sebastine/project-tsukinome-hotfix # Updated to Docker Hub repository
       - name: service.port
         value: '8000'
       - name: image.tag
