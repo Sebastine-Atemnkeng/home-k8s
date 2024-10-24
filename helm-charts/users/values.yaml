@@ -41,13 +41,13 @@ service:
   port: 8000
 
 ingress:
-  enabled: false
+  enabled: true
   className: "nginx"
   # annotations: {}
     # kubernetes.io/ingress.class: nginx
     # kubernetes.io/tls-acme: "true"
   hosts:
-    - host: "example.com"
+    - host: "project-tsukinome.com"
       paths:
         - path: /
           pathType: ImplementationSpecific
