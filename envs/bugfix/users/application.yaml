@@ -1,0 +1,39 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: users=sebastine/project-tsukinome-bugfix  # Updated to Docker Hub repository
+    argocd-image-updater.argoproj.io/users.update-strategy: semver
+    argocd-image-updater.argoproj.io/write-back-method: git
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+  name: users-bugfix
+  namespace: argocd
+spec:
+  destination:
+    namespace: bugfix
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      parameters:
+      - name: image.repository
+        value: sebastine/project-tsukinome-bugfix # Updated to Docker Hub repository
+      - name: service.port
+        value: '8000'
+      - name: image.tag
+        value: 0.1.0
+    path: helm-charts/users
+    repoURL: git@github.com:Sebastine-Atemnkeng/mnmsw-k8s.git # git write back repo
+    targetRevision: master
+  syncPolicy:
+    automated:
+      allowEmpty: false
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - Validate=true
+    - CreateNamespace=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
