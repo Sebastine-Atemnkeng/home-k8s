@@ -24,10 +24,6 @@ spec:
         value: '8000'
       - name: image.tag
         value: 0.1.0
-      - name: ingress.enabled
-        value: 'true'
-      - name: ingress.hosts
-        value: users-pre-pro.com   # Updated to Docker Hub repository
     path: helm-charts/users
     repoURL: git@github.com:Sebastine-Atemnkeng/mnmsw-k8s.git # git write back repo
     targetRevision: master
