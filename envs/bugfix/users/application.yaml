@@ -25,9 +25,13 @@ spec:
       - name: image.tag
         value: 0.1.0
       - name: ingress.enabled
-        value: 'true'
-      - name: ingress.hosts[0]
+        value: 'true'  # Enable ingress for this environment
+      - name: ingress.className
+        value: 'nginx'
+      - name: ingress.hosts[0].host
         value: users-bugfix.com   # Updated to Docker Hub repository
+      - name: ingress.hosts[0].paths[0].path
+        value: '/'
     path: helm-charts/users
     repoURL: git@github.com:Sebastine-Atemnkeng/mnmsw-k8s.git # git write back repo
     targetRevision: master
